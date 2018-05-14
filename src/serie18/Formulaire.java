@@ -88,6 +88,7 @@ public class Formulaire extends JPanel{
 		validation.add(enCours);
 		add(enCours);
 		enCours.addActionListener(ecouteur);
+		enCours.setSelected(true);
 		
 		add(new JLabel("Date d'installation"));
 		/*dateInstallation = new JTextField();
@@ -258,7 +259,9 @@ public class Formulaire extends JPanel{
 				        ctr.setSelected(false);
 				    }
 				}
-				
+				enCours.setSelected(true);
+				p.reinitialiser();
+				pdate.reinitialiser();
 			}
 			if (e.getSource().equals(aPrevoir)){ // si l user a cliquer sur a prévoir
 				p.setEnabled(true);	
@@ -273,11 +276,23 @@ public class Formulaire extends JPanel{
 			if(dureeInstallation.getText().equals("")) {
 				return false;
 			}
+			if(isNumber(dureeInstallation.getText()) == false) {
+				return false;
+			}
+					
 			if(pdate.dateValide() == false) {
 				return false;
 			}
 			return p.dateValide();
-			
+			}
+		
+		private boolean isNumber(String string) {
+			try {
+				Integer.parseInt(string);
+				return true; // l user a bien mit un integer dans dureeinstallation
+			}catch(NumberFormatException e) {
+				return false;  // si on est dans le catch c'est bien un string qui est placé a la place d un int
+			}
 		}
 	}
 }

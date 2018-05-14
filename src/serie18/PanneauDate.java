@@ -83,6 +83,12 @@ public class PanneauDate extends JPanel{
 		return annee.getSelectedItem().toString() + "-" + mois.getSelectedItem().toString() + "-" + jour.getSelectedItem().toString();
 	}
 	
+	public void reinitialiser() {
+		jour.setSelectedIndex(0);
+		mois.setSelectedIndex(0);
+		annee.setSelectedIndex(0);
+	}
+	
 	
 	
 	

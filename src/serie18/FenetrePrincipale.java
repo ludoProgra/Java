@@ -19,11 +19,12 @@ public class FenetrePrincipale extends JFrame{
 
 	private JMenuBar menuB;
 	private JMenu accueil, modification, listing;
-	private JMenuItem ajouter, supprimer, listingComplet, listingFamille, listingSection;
+	private JMenuItem ajouter, supprimer, listingComplet, listingFamille, listingSection, retourPr, aide;
 	private Accueil JPaccueil;
 	private Container cont;
 	private Ecouteur ecouteur;
 	private Connection connection;
+
 	
 	public FenetrePrincipale(Connection connection){
 	
@@ -41,7 +42,12 @@ public class FenetrePrincipale extends JFrame{
 		
 		accueil = new JMenu("Accueil");
 		menuB.add(accueil);
-		//accueil.addActionListener(ecouteur);
+		retourPr = new JMenuItem("Retour");
+		accueil.add(retourPr);
+		retourPr.addActionListener(ecouteur);
+		aide = new JMenuItem("Aide");
+		aide.addActionListener(ecouteur);
+		accueil.add(aide);
 				
 		modification = new JMenu("Modification");
 		menuB.add(modification);
@@ -63,9 +69,12 @@ public class FenetrePrincipale extends JFrame{
 		
 		listingFamille = new JMenuItem("Liste par Famille");
 		listing.add(listingFamille);
+		listingFamille.addActionListener(ecouteur);
 		
 		listingSection = new JMenuItem("Liste par Section");
 		listing.add(listingSection);
+		listingSection.addActionListener(ecouteur);
+		
 		
 		JPaccueil = new Accueil();
 		cont = getContentPane(); // je récupere le conteneur de la fenetre dans laquel je suis
@@ -101,17 +110,34 @@ public class FenetrePrincipale extends JFrame{
 				cont.repaint();
 				FenetrePrincipale.this.setVisible(true);
 			}
-			/* if (e.getSource().equals(accueil)){
+			 if (e.getSource().equals(retourPr)){
 				cont.removeAll();    // effacer les anciens affichages (cont = endroit ou on stock l'ensemble des panneau et autres éléments graphiques)
 				Accueil accueil = new Accueil();// initialise la variable av le nouveau panneau a afficher
 				cont.add(accueil, BorderLayout.CENTER);// le réajouter au panneau
 				cont.repaint(); // force la visualisation graphique du panneau (repeindre le containaire)
 				FenetrePrincipale.this.setVisible(true);
 			}
-			*/
-			
-			
-			
+			 if (e.getSource().equals(listingFamille)){
+				cont.removeAll();    // effacer les anciens affichages (cont = endroit ou on stock l'ensemble des panneau et autres éléments graphiques)
+				RechercheFam rech = new RechercheFam(FenetrePrincipale.this);// initialise la variable av le nouveau panneau a afficher
+				cont.add(rech, BorderLayout.CENTER);// le réajouter au panneau
+				cont.repaint(); // force la visualisation graphique du panneau (repeindre le containaire)
+				FenetrePrincipale.this.setVisible(true);
+			}
+			 if (e.getSource().equals(listingSection)){
+					cont.removeAll();    // effacer les anciens affichages (cont = endroit ou on stock l'ensemble des panneau et autres éléments graphiques)
+					RechercheSec rech = new RechercheSec(FenetrePrincipale.this);// initialise la variable av le nouveau panneau a afficher
+					cont.add(rech, BorderLayout.CENTER);// le réajouter au panneau
+					cont.repaint(); // force la visualisation graphique du panneau (repeindre le containaire)
+					FenetrePrincipale.this.setVisible(true);
+			}
+			 if (e.getSource().equals(aide)){
+					cont.removeAll();    // effacer les anciens affichages (cont = endroit ou on stock l'ensemble des panneau et autres éléments graphiques)
+					Aide aide = new Aide();// initialise la variable av le nouveau panneau a afficher
+					cont.add(aide, BorderLayout.CENTER);// le réajouter au panneau
+					cont.repaint(); // force la visualisation graphique du panneau (repeindre le containaire)
+					FenetrePrincipale.this.setVisible(true);
+			 }
 		}	
 	}		
 }
